@@ -18,7 +18,7 @@ DYNAMIC SYMBOL INPUT
 
 app.get("/values", (req, res) => {
   res.send({
-    API: process.env.API_KEY,
+    API_KEY: process.env.API_KEY,
     API_CALL: process.env.API_CALL + process.env.API_KEY
   });
 });
