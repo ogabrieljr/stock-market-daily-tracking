@@ -22,7 +22,7 @@ export default function Volume(props) {
         bottom: 5
       }}>
       <XAxis hide dataKey="name" />
-      <YAxis hide domain={[0, 100000000]} />
+      <YAxis tick={false} domain={[0, 100000000]} />
       <Tooltip />
       <Bar dataKey="volume" fill="#8884d8" />
     </BarChart>

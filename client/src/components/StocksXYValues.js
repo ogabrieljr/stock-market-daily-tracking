@@ -20,8 +20,6 @@ export default function Stocks() {
         fetch(data.API_CALL)
           .then(res => res.json())
           .then(stockValues => {
-            console.log(stockValues);
-
             const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
             const finalData = entriesArray.map(key => {
               return {
