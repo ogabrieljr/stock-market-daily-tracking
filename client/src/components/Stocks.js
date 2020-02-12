@@ -22,7 +22,7 @@ export default function Stocks() {
             const finalData = entriesArray.map(key => {
               return { open: key[1]["1. open"], name: key[0] };
             });
-            setStockValues(finalData);
+            setStockValues(finalData.reverse());
           })
       );
   }, []);
