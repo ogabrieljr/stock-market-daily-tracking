@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ReferenceLine
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 
 //WIP
 //WIP
@@ -23,7 +13,7 @@ export default function Volume(props) {
   return (
     <BarChart
       width={1000}
-      height={300}
+      height={100}
       data={props.stockValues}
       margin={{
         top: 5,
@@ -31,9 +21,8 @@ export default function Volume(props) {
         left: 20,
         bottom: 5
       }}>
-      <XAxis dataKey="name" />
-
-      <YAxis domain={[0, 100000000]} />
+      <XAxis tick={false} dataKey="name" />
+      <YAxis tick={false} domain={[0, 100000000]} />
       <Tooltip />
       <Bar dataKey="volume" fill="#8884d8" />
     </BarChart>
