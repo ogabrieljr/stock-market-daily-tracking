@@ -18,19 +18,18 @@ export default function Stocks() {
         fetch(data.API_CALL)
           .then(res => res.json())
           .then(stockValues => {
-            var a = Object.entries(stockValues["Time Series (Daily)"]);
-            var b = a.map(key => {
+            const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
+            const finalData = entriesArray.map(key => {
               return { open: key[1]["1. open"], name: key[0] };
             });
-            setStockValues(b);
+            setStockValues(finalData);
           })
       );
   }, []);
-  console.log(stockValues);
 
   return (
     <LineChart
-      width={600}
+      width={800}
       height={400}
       data={stockValues}
       margin={{
@@ -44,7 +43,7 @@ export default function Stocks() {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="open" stroke="#8884d8" />
+      <Line type="monotone" dataKey="open" stroke="#8884d8" dot={false} />
     </LineChart>
   );
 }
