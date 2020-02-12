@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend
 } from "recharts";
+import Volume from "./Volume";
 
 export default function Stocks() {
   const [stockValues, setStockValues] = useState([]);
@@ -19,12 +20,15 @@ export default function Stocks() {
         fetch(data.API_CALL)
           .then(res => res.json())
           .then(stockValues => {
+            console.log(stockValues);
+
             const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
             const finalData = entriesArray.map(key => {
               return {
                 name: key[0],
                 open: key[1]["1. open"],
-                close: key[1]["4. close"]
+                close: key[1]["4. close"],
+                volume: key[1]["5. volume"]
               };
             });
             setStockValues(finalData.reverse());
@@ -33,23 +37,26 @@ export default function Stocks() {
   }, []);
 
   return (
-    <LineChart
-      width={1000}
-      height={400}
-      data={stockValues}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis type="number" domain={[]} />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="open" stroke="#8884d8" dot={false} />
-      <Line type="monotone" dataKey="close" stroke="#ff7300" dot={false} />
-    </LineChart>
+    <div>
+      <LineChart
+        width={1000}
+        height={400}
+        data={stockValues}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5
+        }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis type="number" domain={[]} />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="open" stroke="#8884d8" dot={false} />
+        <Line type="monotone" dataKey="close" stroke="#ff7300" dot={false} />
+      </LineChart>
+      <Volume stockValues={stockValues} />
+    </div>
   );
 }

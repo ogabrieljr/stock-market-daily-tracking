@@ -1,10 +1,10 @@
 import React from "react";
-import Stocks from "./components/Stocks";
+import StocksXYValues from "./components/StocksXYValues";
 
 function App() {
   return (
     <div>
-      <Stocks />
+      <StocksXYValues />
     </div>
   );
 }
