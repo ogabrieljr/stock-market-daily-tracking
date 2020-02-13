@@ -6,9 +6,11 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  BarChart,
+  Bar,
+  ComposedChart
 } from "recharts";
-import Volume from "./Volume";
 
 export default function Stocks() {
   const [stockValues, setStockValues] = useState([]);
@@ -35,26 +37,32 @@ export default function Stocks() {
   }, []);
 
   return (
-    <div>
-      <LineChart
-        width={1000}
-        height={400}
-        data={stockValues}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5
-        }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis type="number" domain={[]} />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="open" stroke="#8884d8" dot={false} />
-        <Line type="monotone" dataKey="close" stroke="#ff7300" dot={false} />
-      </LineChart>
-      <Volume stockValues={stockValues} />
-    </div>
+    <ComposedChart
+      width={1000}
+      height={400}
+      data={stockValues}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis type="number" domain={[]} />
+      <YAxis hide yAxisId="left" domain={[0, 1000000000]} />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="open" stroke="#8884d8" dot={false} />
+      <Line type="monotone" dataKey="close" stroke="#ff7300" dot={false} />
+      <Bar
+        yAxisId="left"
+        dataKey="volume"
+        barSize={3}
+        type="monotone"
+        stroke="#413ea0"
+        dot={false}
+      />
+    </ComposedChart>
   );
 }
