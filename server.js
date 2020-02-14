@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const path = require("path");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -11,13 +10,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
-/*
-TODO: 
-DYNAMIC SYMBOL INPUT
-*/
-
 app.get("/values", (req, res) => {
   res.send({
-    API_CALL: process.env.API_CALL + process.env.API_KEY
+    API_CALL: `${process.env.API_CALL}&symbol=MSFT&apikey=${process.env.API_KEY}`
   });
+});
+
+app.post("/symbol", (req, res) => {
+  res
+    .status(200)
+    .send(
+      `${process.env.API_CALL}&symbol=${req.body.stkSymbol}&apikey=${process.env.API_KEY}`
+    );
 });

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
-  BarChart,
   Bar,
   ComposedChart
 } from "recharts";
@@ -22,16 +20,20 @@ export default function Stocks() {
         fetch(data.API_CALL)
           .then(res => res.json())
           .then(stockValues => {
-            const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
-            const finalData = entriesArray.map(key => {
-              return {
-                name: key[0],
-                open: key[1]["1. open"],
-                close: key[1]["4. close"],
-                volume: key[1]["5. volume"]
-              };
-            });
-            setStockValues(finalData.reverse());
+            if (stockValues) {
+              const entriesArray = Object.entries(
+                stockValues["Time Series (Daily)"]
+              );
+              const finalData = entriesArray.map(key => {
+                return {
+                  name: key[0],
+                  open: key[1]["1. open"],
+                  close: key[1]["4. close"],
+                  volume: key[1]["5. volume"]
+                };
+              });
+              setStockValues(finalData.reverse());
+            }
           })
       );
   }, []);
