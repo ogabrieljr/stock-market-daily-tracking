@@ -10,39 +10,12 @@ import {
   ComposedChart
 } from "recharts";
 
-export default function Stocks() {
-  const [stockValues, setStockValues] = useState([]);
-
-  useEffect(() => {
-    fetch("/values")
-      .then(res => res.json())
-      .then(data =>
-        fetch(data.API_CALL)
-          .then(res => res.json())
-          .then(stockValues => {
-            if (stockValues) {
-              const entriesArray = Object.entries(
-                stockValues["Time Series (Daily)"]
-              );
-              const finalData = entriesArray.map(key => {
-                return {
-                  name: key[0],
-                  open: key[1]["1. open"],
-                  close: key[1]["4. close"],
-                  volume: key[1]["5. volume"]
-                };
-              });
-              setStockValues(finalData.reverse());
-            }
-          })
-      );
-  }, []);
-
+export default function Stocks(props) {
   return (
     <ComposedChart
       width={1000}
       height={400}
-      data={stockValues}
+      data={props.stockValues}
       margin={{
         top: 5,
         right: 30,

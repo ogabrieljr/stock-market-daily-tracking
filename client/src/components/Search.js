@@ -24,10 +24,6 @@ export default function Search() {
   const [stkSymbol, setStkSymbol] = useState("");
   const classes = useStyles();
 
-  // TO DO: SEND TO REDUX
-  // TO DO: SEND TO REDUX
-  // TO DO: SEND TO REDUX
-
   const submit = event => {
     event.preventDefault();
     axios
@@ -35,7 +31,7 @@ export default function Search() {
         stkSymbol
       })
       .then(function(response) {
-        console.log(response.data);
+        setStkSymbol(response.data);
       });
   };
 
