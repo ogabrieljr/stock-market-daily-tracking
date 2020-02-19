@@ -1,4 +1,4 @@
-export const setStockValues = values => ({
+export const setStockValues = prices => ({
   type: "SET_STOCK_VALUES",
-  payload: values
+  payload: prices
 });

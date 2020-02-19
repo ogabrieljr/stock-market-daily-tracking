@@ -16,7 +16,7 @@ function StocksXYValues(props) {
     <ComposedChart
       width={1000}
       height={400}
-      data={props.stockValues}
+      data={props.stockPrices}
       margin={{
         top: 5,
         right: 30,
@@ -44,7 +44,7 @@ function StocksXYValues(props) {
 }
 
 const mapStateToProps = state => ({
-  stockValues: state.stockPricesReducers.stockValues
+  stockPrices: state.stockPricesReducers.stockPrices
 });
 
 export default connect(mapStateToProps)(StocksXYValues);

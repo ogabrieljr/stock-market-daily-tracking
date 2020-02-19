@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  stockValues: []
+  stockPrices: []
 };
 
 const stockPricesReducers = (state = INITIAL_STATE, action) => {
@@ -7,7 +7,7 @@ const stockPricesReducers = (state = INITIAL_STATE, action) => {
     case "SET_STOCK_VALUES":
       return {
         ...state,
-        stockValues: action.payload
+        stockPrices: action.payload
       };
     default:
       return state;
