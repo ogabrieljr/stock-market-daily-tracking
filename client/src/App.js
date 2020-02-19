@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import StocksXYValues from "./components/StocksXYValues";
 import Search from "./components/Search";
+import { connect } from "react-redux";
+import { setStockValues } from "./redux/actions";
 
-function App() {
-  const [stockValues, setStockValues] = useState([]);
-
+function App({ stockValues, dispatch }) {
   useEffect(() => {
     fetch("/values")
       .then(res => res.json())
@@ -24,11 +24,12 @@ function App() {
                   volume: key[1]["5. volume"]
                 };
               });
-              setStockValues(finalData.reverse());
+              dispatch(setStockValues(finalData.reverse()));
             }
           })
       );
   }, []);
+  console.log(stockValues);
 
   return (
     <div>
@@ -38,4 +39,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  stockValues: state.stockPricesReducers.stockValues
+});
+
+export default connect(mapStateToProps)(App);
