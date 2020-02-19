@@ -9,8 +9,9 @@ import {
   Bar,
   ComposedChart
 } from "recharts";
+import { connect } from "react-redux";
 
-export default function Stocks(props) {
+function StocksXYValues(props) {
   return (
     <ComposedChart
       width={1000}
@@ -41,3 +42,9 @@ export default function Stocks(props) {
     </ComposedChart>
   );
 }
+
+const mapStateToProps = state => ({
+  stockValues: state.stockPricesReducers.stockValues
+});
+
+export default connect(mapStateToProps)(StocksXYValues);

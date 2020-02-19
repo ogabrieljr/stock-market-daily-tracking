@@ -4,7 +4,7 @@ import Search from "./components/Search";
 import { connect } from "react-redux";
 import { setStockValues } from "./redux/actions";
 
-function App({ stockValues, dispatch }) {
+function App({ dispatch }) {
   useEffect(() => {
     fetch("/values")
       .then(res => res.json())
@@ -33,13 +33,9 @@ function App({ stockValues, dispatch }) {
   return (
     <div>
       <Search />
-      <StocksXYValues stockValues={stockValues} />
+      <StocksXYValues />
     </div>
   );
 }
 
-const mapStateToProps = state => ({
-  stockValues: state.stockPricesReducers.stockValues
-});
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);
