@@ -29,7 +29,6 @@ function App({ stockValues, dispatch }) {
           })
       );
   }, []);
-  console.log(stockValues);
 
   return (
     <div>
