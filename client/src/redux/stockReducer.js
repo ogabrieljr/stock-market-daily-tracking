@@ -2,7 +2,7 @@ const INITIAL_STATE = {
   stockPrices: []
 };
 
-const stockPricesReducers = (state = INITIAL_STATE, action) => {
+const stockReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SET_STOCK_VALUES":
       return {
@@ -14,4 +14,4 @@ const stockPricesReducers = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default stockPricesReducers;
+export default stockReducer;

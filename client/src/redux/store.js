@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from "redux";
-import stockPricesReducers from "./stockPrices";
+import stockReducer from "./stockReducer";
 
-const rootStore = combineReducers({ stockPricesReducers });
+const rootStore = combineReducers({ stockReducer });
 
 export const store = createStore(rootStore);

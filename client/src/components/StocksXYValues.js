@@ -44,7 +44,7 @@ function StocksXYValues(props) {
 }
 
 const mapStateToProps = state => ({
-  stockPrices: state.stockPricesReducers.stockPrices
+  stockPrices: state.stockReducer.stockPrices
 });
 
 export default connect(mapStateToProps)(StocksXYValues);
