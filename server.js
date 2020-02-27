@@ -20,6 +20,6 @@ app.post("/symbol", (req, res) => {
   res
     .status(200)
     .send(
-      `${process.env.API_CALL}&symbol=${req.body.stkSymbol}&apikey=${process.env.API_KEY}`
+      `${process.env.API_CALL}&symbol=${req.body.stockSymbol}&apikey=${process.env.API_KEY}`
     );
 });

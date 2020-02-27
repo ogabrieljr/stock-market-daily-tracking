@@ -12,6 +12,8 @@ import {
 import { connect } from "react-redux";
 
 function StocksXYValues(props) {
+  console.log(props);
+
   return (
     <ComposedChart
       width={1000}
@@ -44,7 +46,8 @@ function StocksXYValues(props) {
 }
 
 const mapStateToProps = state => ({
-  stockPrices: state.stockReducer.stockPrices
+  stockPrices: state.stockReducer.stockPrices,
+  apiCall: state.stockReducer.apiCall
 });
 
 export default connect(mapStateToProps)(StocksXYValues);

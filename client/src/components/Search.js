@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import { connect } from "react-redux";
+import { setApiCall } from "../redux/actions";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -20,25 +22,22 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function Search() {
-  const [stkSymbol, setStkSymbol] = useState("");
+function Search({ dispatch }) {
+  const [stockSymbol, setStockSymbol] = useState("");
+
   const classes = useStyles();
 
   const submit = event => {
     event.preventDefault();
     axios
-      .post("/symbol", {
-        stkSymbol
-      })
-      .then(function(response) {
-        setStkSymbol(response.data);
-      });
+      .post("/symbol", { stockSymbol })
+      .then(response => dispatch(setApiCall(response.data)));
   };
 
   return (
     <form className={classes.root}>
       <TextField
-        onChange={e => setStkSymbol(e.target.value)}
+        onChange={e => setStockSymbol(e.target.value)}
         id="standard-basic"
         label="Standard"
       />
@@ -54,3 +53,5 @@ export default function Search() {
     </form>
   );
 }
+
+export default connect()(Search);

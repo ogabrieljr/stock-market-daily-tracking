@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
-  stockPrices: []
+  stockPrices: [],
+  apiCall: ""
 };
 
 const stockReducer = (state = INITIAL_STATE, action) => {
@@ -8,6 +9,11 @@ const stockReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         stockPrices: action.payload
+      };
+    case "SET_API_CALL":
+      return {
+        ...state,
+        apiCall: action.payload
       };
     default:
       return state;
