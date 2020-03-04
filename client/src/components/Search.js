@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { connect } from "react-redux";
-import { setApiCall } from "../redux/actions";
+import { setApiCall, setStockValues } from "../redux/actions";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function Search({ dispatch }) {
+function Search({ dispatch, apiCall }) {
   const [stockSymbol, setStockSymbol] = useState("");
 
   const classes = useStyles();
@@ -32,6 +32,25 @@ function Search({ dispatch }) {
     axios
       .post("/symbol", { stockSymbol })
       .then(response => dispatch(setApiCall(response.data)));
+
+    fetch(apiCall)
+      .then(res => res.json())
+      .then(stockValues => {
+        if (stockValues) {
+          const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
+          const metaData = Object.values(stockValues["Meta Data"]);
+          const finalData = entriesArray.map(key => {
+            return {
+              name: key[0],
+              open: key[1]["1. open"],
+              close: key[1]["4. close"],
+              volume: key[1]["5. volume"],
+              symbol: metaData[1]
+            };
+          });
+          dispatch(setStockValues(finalData.reverse()));
+        }
+      });
   };
 
   return (
@@ -54,4 +73,8 @@ function Search({ dispatch }) {
   );
 }
 
-export default connect()(Search);
+const mapStateToProps = state => ({
+  apiCall: state.stockReducer.apiCall
+});
+
+export default connect(mapStateToProps)(Search);

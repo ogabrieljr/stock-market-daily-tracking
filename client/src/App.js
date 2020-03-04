@@ -16,12 +16,14 @@ function App({ dispatch }) {
               const entriesArray = Object.entries(
                 stockValues["Time Series (Daily)"]
               );
+              const metaData = Object.values(stockValues["Meta Data"]);
               const finalData = entriesArray.map(key => {
                 return {
                   name: key[0],
                   open: key[1]["1. open"],
                   close: key[1]["4. close"],
-                  volume: key[1]["5. volume"]
+                  volume: key[1]["5. volume"],
+                  symbol: metaData[1]
                 };
               });
               dispatch(setStockValues(finalData.reverse()));
