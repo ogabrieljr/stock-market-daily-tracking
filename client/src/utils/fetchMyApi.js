@@ -23,5 +23,4 @@ async function fetchMyApi() {
   stockValues();
 }
 
-const a = fetchMyApi;
-export default a;
+export default fetchMyApi;
