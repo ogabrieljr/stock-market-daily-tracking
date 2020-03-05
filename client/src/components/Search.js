@@ -24,15 +24,12 @@ const useStyles = makeStyles(() => ({
 
 function Search({ dispatch, apiCall }) {
   const [stockSymbol, setStockSymbol] = useState("");
-
   const classes = useStyles();
-
   const submit = event => {
     event.preventDefault();
     axios
       .post("/symbol", { stockSymbol })
       .then(response => dispatch(setApiCall(response.data)));
-
     fetch(apiCall)
       .then(res => res.json())
       .then(stockValues => {
