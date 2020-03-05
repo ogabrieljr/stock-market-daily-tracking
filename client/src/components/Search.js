@@ -31,29 +31,32 @@ const useStyles = makeStyles(() => ({
 function Search({ dispatch, apiCall }) {
   const [stockSymbol, setStockSymbol] = useState("");
   const classes = useStyles();
+
   const submit = event => {
     event.preventDefault();
     axios
       .post("/symbol", { stockSymbol })
       .then(response => dispatch(setApiCall(response.data)));
-    fetch(apiCall)
-      .then(res => res.json())
-      .then(stockValues => {
-        if (stockValues) {
-          const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
-          const metaData = Object.values(stockValues["Meta Data"]);
-          const finalData = entriesArray.map(key => {
-            return {
-              name: key[0],
-              open: key[1]["1. open"],
-              close: key[1]["4. close"],
-              volume: key[1]["5. volume"],
-              symbol: metaData[1]
-            };
-          });
-          dispatch(setStockValues(finalData.reverse()));
-        }
-      });
+    console.log(apiCall);
+
+    // fetch(apiCall)
+    //   .then(res => res.json())
+    //   .then(stockValues => {
+    //     if (stockValues) {
+    //       const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
+    //       const metaData = Object.values(stockValues["Meta Data"]);
+    //       const finalData = entriesArray.map(key => {
+    //         return {
+    //           name: key[0],
+    //           open: key[1]["1. open"],
+    //           close: key[1]["4. close"],
+    //           volume: key[1]["5. volume"],
+    //           symbol: metaData[1]
+    //         };
+    //       });
+    //       dispatch(setStockValues(finalData.reverse()));
+    //     }
+    //   });
   };
 
   return (
