@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 app.get("/values", (req, res) => {
-  res.send({
+  res.json({
     API_CALL: `${process.env.API_CALL}&symbol=MSFT&apikey=${process.env.API_KEY}`
   });
 });
