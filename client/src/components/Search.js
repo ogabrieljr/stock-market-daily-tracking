@@ -22,6 +22,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+//bug
+//bug
+//bug
+//bug
+//bug
+
 function Search({ dispatch, apiCall }) {
   const [stockSymbol, setStockSymbol] = useState("");
   const classes = useStyles();
