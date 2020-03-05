@@ -28,7 +28,7 @@ function App({ dispatch }) {
       stockValues();
     }
     fetchMyApi();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
