@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -22,12 +22,6 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-//bug
-//bug
-//bug
-//bug
-//bug
-
 function Search({ dispatch, apiCall }) {
   const [stockSymbol, setStockSymbol] = useState("");
   const classes = useStyles();
@@ -38,26 +32,28 @@ function Search({ dispatch, apiCall }) {
       .post("/symbol", { stockSymbol })
       .then(response => dispatch(setApiCall(response.data)));
     console.log(apiCall);
-
-    // fetch(apiCall)
-    //   .then(res => res.json())
-    //   .then(stockValues => {
-    //     if (stockValues) {
-    //       const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
-    //       const metaData = Object.values(stockValues["Meta Data"]);
-    //       const finalData = entriesArray.map(key => {
-    //         return {
-    //           name: key[0],
-    //           open: key[1]["1. open"],
-    //           close: key[1]["4. close"],
-    //           volume: key[1]["5. volume"],
-    //           symbol: metaData[1]
-    //         };
-    //       });
-    //       dispatch(setStockValues(finalData.reverse()));
-    //     }
-    //   });
   };
+
+  useEffect(() => {
+    fetch(apiCall)
+      .then(res => res.json())
+      .then(stockValues => {
+        if (stockValues) {
+          const entriesArray = Object.entries(stockValues["Time Series (Daily)"]);
+          const metaData = Object.values(stockValues["Meta Data"]);
+          const finalData = entriesArray.map(key => {
+            return {
+              name: key[0],
+              open: key[1]["1. open"],
+              close: key[1]["4. close"],
+              volume: key[1]["5. volume"],
+              symbol: metaData[1]
+            };
+          });
+          dispatch(setStockValues(finalData.reverse()));
+        }
+      });
+  }, [apiCall]);
 
   return (
     <form className={classes.root}>
