@@ -31,7 +31,6 @@ function Search({ dispatch, apiCall }) {
     axios
       .post("/symbol", { stockSymbol })
       .then(response => dispatch(setApiCall(response.data)));
-    console.log(apiCall);
   };
 
   useEffect(() => {
