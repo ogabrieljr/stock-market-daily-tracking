@@ -15,10 +15,10 @@ export default function Asynchronous() {
     }
     (async () => {
       const response = await fetch("api");
-      const countries = await response.json();
+      const data = await response.json();
       if (active) {
-        var b = countries["bestMatches"];
-        setOptions(b.map(key => key));
+        const symbol = data["bestMatches"];
+        setOptions(symbol.map(key => key));
       }
     })();
     return () => {
@@ -39,9 +39,7 @@ export default function Asynchronous() {
       open={open}
       onOpen={() => setOpen(true)}
       onClose={() => setOpen(false)}
-      getOptionSelected={(option, value) => {
-        return option["1. symbol"] === value.name;
-      }}
+      getOptionSelected={(option, value) => option["1. symbol"] === value.name}
       getOptionLabel={option => (
         <>
           {option["1. symbol"]} - {option["2. name"]}
@@ -52,7 +50,7 @@ export default function Asynchronous() {
       renderInput={params => (
         <TextField
           {...params}
-          label="Asynchronous"
+          label="Search"
           InputProps={{
             ...params.InputProps,
             endAdornment: (
