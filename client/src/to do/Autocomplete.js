@@ -33,7 +33,6 @@ export default function Asynchronous() {
 
   return (
     <Autocomplete
-      autoComplete="off"
       style={{ width: 300 }}
       open={open}
       onOpen={() => setOpen(true)}

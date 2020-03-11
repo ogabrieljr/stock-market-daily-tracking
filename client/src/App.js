@@ -49,6 +49,10 @@ function App() {
   const classes = useStyles();
   return (
     <div>
+      {/* <Search />
+      <div className={classes.root}>{errorMsg}</div>
+      <StocksXYValues /> */}
+
       <Autocomplete />
     </div>
   );
