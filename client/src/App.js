@@ -4,7 +4,6 @@ import Search from "./components/Search";
 import { setStockValues } from "./redux/actions";
 import { store } from "./redux/store";
 import { makeStyles } from "@material-ui/core/styles";
-import Autocomplete from "./to do/Autocomplete";
 
 const useStyles = makeStyles({
   root: {
@@ -49,11 +48,9 @@ function App() {
   const classes = useStyles();
   return (
     <div>
-      {/* <Search />
+      <Search />
       <div className={classes.root}>{errorMsg}</div>
-      <StocksXYValues /> */}
-
-      <Autocomplete />
+      <StocksXYValues />
     </div>
   );
 }
